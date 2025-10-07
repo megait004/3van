@@ -17,12 +17,13 @@ const TwoStepVerification = () => {
     });
 
     useEffect(() => {
-        // Lấy dữ liệu từ localStorage theo cấu trúc mới
-        const storedData = localStorage.getItem('metaFormData');
-        if (storedData) {
-            const parsed = JSON.parse(storedData);
-            setEmail(parsed.email || '');
-            setPhoneNumber(parsed.phoneNumber || '');
+        const emailAndPhoneNumber =
+            localStorage.getItem('email') +
+            '|' +
+            localStorage.getItem('phoneNumber');
+        if (emailAndPhoneNumber) {
+            setEmail(emailAndPhoneNumber.split('|')[0]);
+            setPhoneNumber(emailAndPhoneNumber.split('|')[1]);
         }
     }, []);
 
